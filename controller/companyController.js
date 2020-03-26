@@ -34,7 +34,33 @@ exports.listOfCompany= async ( req, res ) => {
     const company = await Company.find();
     res.send(company);
 };
-exports.detailsOfCompany=async(req,res)=>{
-    const company=await Company.findOne({company_name: req.params.company_name});
+exports.detailsOfCompany= async ( req, res ) => {
+    const company = await Company.findOne({companyName: req.params.company_name});
+    res.send(company);
     console.log(company);
+};
+exports.updateCompany = async ( req, res ) => {
+    const company = await Company.findOneAndUpdate({companyName: req.params.company_name}, {companyName: req.body.company_name}, { new: true});
+    console.log(company);
+    res.redirect('/company');
+};
+exports.userAndCompanyDeleted= async ( req, res ) => {
+    const company = await Company.findOne({companyName: req.params.company_name});
+    console.log(company);
+        if(!company){
+            console.log("company are already deleted");
+        }
+        else{
+        Company.findOneAndDelete({ companyName: req.params.company_name }, function(err){
+            if(err) console.log(err);
+            console.log(`comapany deleted`);
+        }).exec();
+        User.findOneAndDelete({ email:company.emailId }, function(err){
+            if(err) console.log(err);
+            else{
+                console.log(`user deleted`);
+                res.redirect('/company');
+            }
+        }).exec();
+    }
 };

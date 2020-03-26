@@ -11,5 +11,7 @@ router.post('/user/edit', userController.editUsers);
 router.delete('/user', userController.deleteExistingUser);
 router.post('/company',companyController.addNewCompany);
 router.get('/company',companyController.listOfCompany);
-router.get('/company/:company_name',companyController.detailsOfCompany);
+router.get('/company/:companyName',companyController.detailsOfCompany);
+router.put('/company/:companyName',companyController.updateCompany);
+router.delete('/company/:companyName',companyController.userAndCompanyDeleted);
 module.exports=router;
