@@ -1,0 +1,19 @@
+mixin editUsersForm(user ={})
+    form.form(action=`/user?emailId=${user.emailId}` method="POST" enctype="application/x-www-form-urlencoded")
+    input(type="hidden" name="_method" value="PUT")
+    label(for="name") Name: 
+    input(type="text" name="name" id="username" value=user.name)
+    br
+    label(for="age") Age:
+    input(type="number" name="age" id="age" value=user.age)
+    br
+    label(for="city") City: 
+    input(type="text" name="city" id="city" value=user.city)
+    br
+    label(for="state") State: 
+    input(type="text" name="state" id="state" value=user.state)
+    br
+    label(for="emailId") Email-id:
+    input(type="email" name="emailId" id="emailId" value=user.emailId disabled)
+    br
+    input.button(type="submit" value="Submit")
