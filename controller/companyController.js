@@ -39,11 +39,13 @@ exports.detailsOfCompany= async ( req, res ) => {
     res.send(company);
     console.log(company);
 };
-exports.updateCompany = async ( req, res ) => {
-    const company = await Company.findOneAndUpdate({companyName: req.params.company_name}, {companyName: req.body.company_name}, { new: true});
-    console.log(company);
-    res.redirect('/company');
-};
+exports.updateCompany = async (req, res) => {
+    console.log(req.body.company_name);
+    const company=Company.findOneAndUpdate({ company_name: req.params.company_name}, {company_name: req.body.company_name},{new:true,runValidators:true}).exec();
+        console.log("company updated successfully");
+        console.log(company);
+        res.send(company);
+}
 exports.userAndCompanyDeleted= async ( req, res ) => {
     const company = await Company.findOne({companyName: req.params.company_name});
     console.log(company);
